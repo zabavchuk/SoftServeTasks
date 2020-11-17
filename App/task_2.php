@@ -10,7 +10,6 @@ use PHPMailer\PHPMailer\{
 use Configs\ConfigMail;
 
 require_once ('../vendor/autoload.php');
-//require_once ('../Configs/ConfigMail.php');
 
 class Email{
 

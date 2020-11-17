@@ -23,10 +23,6 @@ class Database
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->pdo->query("SET NAMES ". ConfigDB::DB_CHARSET);
             $this->pdo->query("SET CHARACTER SET ". ConfigDB::DB_CHARSET);
-
-//            self::$instance = new PDO($dsn, Config::DB_USER, Config::DB_PASSWORD);
-//            self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//            self::$instance->query("SET NAMES ".Config::DB_CHARSET);
         }
         catch (PDOException $e) {
             print "Error!: " . $e->getMessage() . "<br/>";

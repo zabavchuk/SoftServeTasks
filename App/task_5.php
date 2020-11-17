@@ -1,10 +1,10 @@
 <?php
 namespace App;
 
-require_once ('../vendor/autoload.php');
 use FPDF;
 use PDO;
 
+require_once ('../vendor/autoload.php');
 
 class PDF extends FPDF
 {
