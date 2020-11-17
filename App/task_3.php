@@ -127,7 +127,7 @@ class Import{
         }
     }
 
-    public function sqlImport(){
+    public function sqlFormat(){
 
         $output = '';
         $file_data = file($this->filename);
@@ -142,7 +142,6 @@ class Import{
                     if($end_character == ';')
                     {
                         Database::getInstance()->pdo->query($output);
-
                         $output = '';
                     }
                 }
@@ -169,23 +168,21 @@ if(isset($_POST['submit']) && $_POST['submit'] === 'import'){
 
     $allow_excel = array('xlsx');
 
-    $array = explode(".", $_FILES["import"]["name"]);
+    $array = explode(".", $_FILES['import']['tmp_name']);
     $extension = end($array);
 
     if($extension == 'sql'){
 
         $import = new Import($_FILES['import']['tmp_name']);
-//        $import = new Import("D:\OPEN SERVER\OSPanel\domains\softserve.local\dump\dump-16-11-2020.sql");
 
-        $import->sqlImport();
-        $massage = 'Import successful';
+        $import->sqlFormat();
+        $import_massage = 'Import successful';
     }
     elseif(in_array($extension, $allow_excel)){
         $import = new Import($_FILES['import']['tmp_name']);
-    //    $import = new Import("C:\Users\Данило\Downloads\dump-16-11-2020.xlsx");
 
         $import->xlsxFormat();
-        $massage = 'Import successful';
+        $import_massage = 'Import successful';
     }
 }
 

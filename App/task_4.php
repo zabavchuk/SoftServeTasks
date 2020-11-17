@@ -19,8 +19,8 @@ function sendRequest($method, $params = []){
 
 function checkUpdates(){
 
-    // update_id 577153588
-    $response = sendRequest('getUpdates', array('offset' => 577153588));
+    // update_id 577153594
+    $response = sendRequest('getUpdates', array('offset' => 577153594));
     $results =  array_reverse($response['result']);
 
     if ($response['ok']){

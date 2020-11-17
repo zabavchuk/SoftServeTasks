@@ -4,11 +4,11 @@
         <legend>Import</legend>
         <div class='container'>
 
-        Import database: <input id="import" name="import" type="file" />
+        Import in table book: <input id="import" name="import" type="file" />
 
             <input type='submit' name='submit' value='import' />
 
-        <div class="success"><?=$massage?></div>
+        <div class="success"><?=$import_massage?></div>
         </div>
     </fieldset>
 </form>
@@ -29,7 +29,7 @@
 
             <input type='submit' name='export' value='Export database' />
 
-            <div class="success"><?=$massage?></div>
+            <div class="success"><?=$export_massage?></div>
         </div>
     </fieldset>
 </form>
