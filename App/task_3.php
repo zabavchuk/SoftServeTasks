@@ -155,12 +155,9 @@ if(isset($_POST['type']) && $_POST['type'] === 'Xlsx'){
     Export::xlsxFormat($_POST['type']);
 }
 
-
 if(isset($_POST['type']) && $_POST['type'] === 'sql'){
     Export::sqlFormat();
 }
-
-
 
 if(isset($_POST['submit']) && $_POST['submit'] === 'import'){
 

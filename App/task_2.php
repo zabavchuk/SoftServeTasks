@@ -52,26 +52,21 @@ class Email{
 
             $mail->send();
 
-            self::success();
+//            self::success();
 
         } catch (Exception $e) {
             echo "Error: {$mail->ErrorInfo}";
         }
     }
 
-    public static function success(){
-        $host = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
-
-        header("Location: $host/App/task_2.php");
-    }
+//    public static function success(){
+//        $host = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+//
+//        header("Location: $host/App/task_2.php");
+//    }
 }
 
-if(!isset($_POST['name'])){
-    $content_view = 'views/task_2.php';
-    $title = 'Task 2';
-    include 'views/main.php';
-}
-else{
+if(isset($_POST['name'])){
     Email::send(
         $_POST['name'],
         $_POST['email'],
@@ -80,4 +75,10 @@ else{
         $_FILES['file']['tmp_name'],
         $_FILES['file']['name']
     );
+
+    $message_sent = 'Message sent!';
 }
+
+$content_view = 'views/task_2.php';
+$title = 'Task 2';
+include 'views/main.php';

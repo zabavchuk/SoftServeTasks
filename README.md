@@ -1,7 +1,7 @@
  <h1> Tasks</h1>
 1. Select mysql to table (with css)<br>
 2. Send email from php with attachment<br>
-3. Import/export DBF <-> MySQL <-> XLSX<br>
+3. Import/export MySQL <-> XLSX<br>
 4. Send text to telegram bot user<br>
 5. Export table to PDF
 <br>
