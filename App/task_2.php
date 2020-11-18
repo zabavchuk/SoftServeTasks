@@ -52,18 +52,10 @@ class Email{
 
             $mail->send();
 
-//            self::success();
-
         } catch (Exception $e) {
             echo "Error: {$mail->ErrorInfo}";
         }
     }
-
-//    public static function success(){
-//        $host = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
-//
-//        header("Location: $host/App/task_2.php");
-//    }
 }
 
 if(isset($_POST['name'])){
