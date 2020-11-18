@@ -3,11 +3,18 @@
 namespace App;
 
 require_once('../vendor/autoload.php');
-require_once('Third Party/PDF_MC_Table.php');
+require('../env.php');
+require_once('Third_Party/PDF_MC_Table.php');
 
-use PDF_MC_Table;
+use App\Third_Party\PDF_MC_Table;
+use App\Models\Book;
 
-class ExportTable{
+/**
+ * Class ExportTable
+ * @package App
+ */
+class ExportTable
+{
 
     public static function pdfFormat()
     {
@@ -57,6 +64,6 @@ if(isset($_POST['export'])){
     ExportTable::pdfFormat();
 }
 
-$content_view = 'views/task_5.php';
+$content_view = 'Views/task_5.php';
 $title = 'Task 5';
-include 'views/main.php';
+include 'Views/main.php';

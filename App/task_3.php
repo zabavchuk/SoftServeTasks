@@ -3,20 +3,22 @@
 namespace App;
 
 require_once('../vendor/autoload.php');
+require('../env.php');
 
-use Configs\DB;
 use PhpOffice\PhpSpreadsheet\{IOFactory, Spreadsheet};
-
+use App\Models\Book;
 /**
  * Class Export
  * @package App
  */
-class Export{
+class Export
+{
 
     /**
      * @param string $filetype
      */
-    public static function xlsxFormat(string $filetype){
+    public static function xlsxFormat(string $filetype)
+    {
 
         //Retrieve the data from our table.
         $data = Book::getAllBooks();
@@ -67,13 +69,14 @@ class Export{
         exit();
     }
 
-    public static function sqlFormat(){
+    public static function sqlFormat()
+    {
 
 
         $filename = 'dump-'. date('d-m-Y').'.sql';
         $dir = realpath(dirname(__FILE__) . '/../dump') . '\\'.$filename;
 
-        exec('mysqldump --user='. DB::DB_USER .' --password='. DB::DB_PASSWORD .' --host='. DB::DB_HOST .' '. DB::DB_NAME .' --result-file='. $dir .' 2>&1', $output);
+        exec('mysqldump --user='. $_ENV['DB_USER'] .' --password='. $_ENV['DB_PASSWORD'] .' --host='. $_ENV['DB_HOST'] .' '. $_ENV['DB_NAME'] .' --result-file='. $dir .' 2>&1', $output);
 
         header("Location: /dump/$filename");
     }
@@ -83,12 +86,14 @@ class Export{
  * Class Import
  * @package App
  */
-class Import{
+class Import
+{
 
     /**
      * @param string $filename
      */
-    public static function xlsxFormat(string $filename){
+    public static function xlsxFormat(string $filename)
+    {
 
         $input_file_type = IOFactory::identify($filename);
 
@@ -125,7 +130,8 @@ class Import{
     /**
      * @param string $filename
      */
-    public static function sqlFormat(string $filename){
+    public static function sqlFormat(string $filename)
+    {
 
         $output = '';
         $file_data = file($filename);
@@ -180,6 +186,6 @@ if(isset($_POST['submit']) && $_POST['submit'] === 'import'){
     }
 }
 
-$content_view = 'views/task_3.php';
+$content_view = 'Views/task_3.php';
 $title = 'Task 3';
-include 'views/main.php';
+include 'Views/main.php';

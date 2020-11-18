@@ -1,11 +1,13 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use PDO;
+use App\Database;
+
 /**
  * Class Book
- * @package App
+ * @package App\Models
  */
 class Book
 {

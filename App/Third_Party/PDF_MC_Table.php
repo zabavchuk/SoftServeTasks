@@ -1,5 +1,5 @@
 <?php
-
+namespace App\Third_Party;
 /**
  * PDF_MC_Table class.
  *
@@ -11,6 +11,8 @@
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE.
  */
+use FPDF;
+
 class PDF_MC_Table extends FPDF
 {
     private $widths;
