@@ -15,6 +15,6 @@
 <a href="/App/task_3.php" class="<?= $title ==='Task 3' ? 'disabled' : '' ?>">Task 3</a>
 <a href="/App/task_4.php" class="<?= $title ==='Task 4' ? 'disabled' : '' ?>">Task 4</a>
 <a href="/App/task_5.php" class="<?= $title ==='Task 5' ? 'disabled' : '' ?>">Task 5</a>
-<?php include $content_view; ?>
+<?php require_once $content_view; ?>
 </body>
 </html>

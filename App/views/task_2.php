@@ -16,8 +16,9 @@
             <label for='message' >Message*:</label>
             <textarea rows="10" cols="50" name='message' id='message' required></textarea>
 
-
-            Send this file: <input id="file" name="file" type="file" />
+            <label for='message' >
+                Send this file:<input id="file" name="file" type="file" />
+            </label>
             <input type='submit' name='Submit' value='Submit' />
         </div>
 

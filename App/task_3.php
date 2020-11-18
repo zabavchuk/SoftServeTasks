@@ -1,23 +1,25 @@
 <?php
+
 namespace App;
 
-use PDO;
-use App\Database;
-use Configs\ConfigDB;
+require_once('../vendor/autoload.php');
+
+use Configs\DB;
 use PhpOffice\PhpSpreadsheet\{IOFactory, Spreadsheet};
 
-require_once ('../vendor/autoload.php');
-
+/**
+ * Class Export
+ * @package App
+ */
 class Export{
 
+    /**
+     * @param string $filetype
+     */
     public static function xlsxFormat(string $filetype){
 
-        $query = "SELECT * FROM books";
-        $result = Database::getInstance()->pdo->prepare($query);
-        $result->execute(array(':books' => 'query'));
-
         //Retrieve the data from our table.
-        $data = $result->fetchAll(PDO::FETCH_ASSOC);
+        $data = Book::getAllBooks();
 
         $file = new Spreadsheet();
 
@@ -71,29 +73,29 @@ class Export{
         $filename = 'dump-'. date('d-m-Y').'.sql';
         $dir = realpath(dirname(__FILE__) . '/../dump') . '\\'.$filename;
 
-        exec('mysqldump --user='. ConfigDB::DB_USER .' --password='. ConfigDB::DB_PASSWORD .' --host='. ConfigDB::DB_HOST .' '. ConfigDB::DB_NAME .' --result-file='. $dir .' 2>&1', $output);
+        exec('mysqldump --user='. DB::DB_USER .' --password='. DB::DB_PASSWORD .' --host='. DB::DB_HOST .' '. DB::DB_NAME .' --result-file='. $dir .' 2>&1', $output);
 
         header("Location: /dump/$filename");
     }
 }
 
+/**
+ * Class Import
+ * @package App
+ */
 class Import{
 
-    private $filename;
+    /**
+     * @param string $filename
+     */
+    public static function xlsxFormat(string $filename){
 
-    public function __construct($filename)
-    {
-        $this->filename = $filename;
-    }
-
-    public function xlsxFormat(){
-
-        $input_file_type = IOFactory::identify($this->filename);
+        $input_file_type = IOFactory::identify($filename);
 
         try {
 
             $reader = IOFactory::createReader($input_file_type);
-            $spreadsheet = $reader->load($this->filename);
+            $spreadsheet = $reader->load($filename);
             $data = $spreadsheet->getActiveSheet()->toArray();
 
 
@@ -104,21 +106,14 @@ class Import{
             foreach ($data as $key => $val){
                 if($key > 0){
 
-                    $insert_data = array(
-                        'author' => $val[1],
-                        'title' => $val[2],
-                        'description' => $val[3],
-                        'lang' => $val[4],
-                        'pages' => $val[5],
-                        'image' => $val[6],
+                    Book::insertBook(
+                        $val[1],
+                        $val[2],
+                        $val[3],
+                        $val[4],
+                        $val[5],
+                        $val[6]
                     );
-
-                    $query = "INSERT INTO books (author, title, description, lang, pages, image)
-                              VALUES (:author, :title, :description, :lang, :pages, :image)";
-
-
-                    $result = Database::getInstance()->pdo->prepare($query);
-                    $result->execute($insert_data);
                 }
             }
 
@@ -127,10 +122,13 @@ class Import{
         }
     }
 
-    public function sqlFormat(){
+    /**
+     * @param string $filename
+     */
+    public static function sqlFormat(string $filename){
 
         $output = '';
-        $file_data = file($this->filename);
+        $file_data = file($filename);
 
         try{
             foreach($file_data as $row) {
@@ -173,15 +171,14 @@ if(isset($_POST['submit']) && $_POST['submit'] === 'import'){
 
     if($extension == 'sql'){
 
-        $import = new Import($_FILES['import']['tmp_name']);
+        Import::sqlFormat($_FILES['import']['tmp_name']);
 
-        $import->sqlFormat();
         $import_massage = 'Import successful';
     }
     elseif(in_array($extension, $allow_excel)){
-        $import = new Import($_FILES['import']['tmp_name']);
 
-        $import->xlsxFormat();
+        Import::xlsxFormat($_FILES['import']['tmp_name']);
+
         $import_massage = 'Import successful';
     }
 }

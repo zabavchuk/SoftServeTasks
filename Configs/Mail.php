@@ -3,7 +3,7 @@
 namespace Configs;
 
 
-class ConfigMail
+class Mail
 {
     /**
      * smtp host

@@ -5,6 +5,11 @@ const TOKEN = '1488234923:AAGB-sAoibttcnn9mlsJMXhfNW11gA-to0Q';
 const BASE_URL = 'https://api.telegram.org/bot'. TOKEN .'/';
 const HELLO = array('привіт', 'привіт)', 'привіт!', 'здоров', 'здоров!', 'здоров)');
 
+/**
+ * @param $method
+ * @param array $params
+ * @return array
+ */
 function sendRequest($method, $params = []){
 
     if(!empty($params)){

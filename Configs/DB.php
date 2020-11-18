@@ -2,7 +2,7 @@
 
 namespace Configs;
 
-class ConfigDB
+class DB
 {
 
     /**
