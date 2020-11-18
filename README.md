@@ -14,13 +14,13 @@ Requirements:
 <li>Apache 2.0+</li>
 </ul>
 
-<p>You need to configure DB.php file (location: Configs/DB.php) according to your DB settings and import soft.sql in your database.
-</p>
+<p>All logic files in <b>App/.</b> directory. Also there is Database.php this is connection to DB.</p>
+<p><b>App/Models</b> have database queries.</p>
+<p><b>App/Views</b> directory consist a simple web pages.</p>
+<p>For correct project working you need:</p>
 
-<p>Database and email configurations in <b>Configs</b> directory.</p>
-<p>All logic files in App directory. Also there is Database.php this is connection to DB</p>
-<p><b>App/views</b> directory consist a simple web pages.</p>
-<p>
-To install all dependecies use: <pre>composer install<pre> 
-</p>
-
+<ul>
+<li>rename <i>.env.example</i> to <i>.env</i> and configure file(only database; <i>Email</i> and <i>Telegram Bot</i> <b>do not change</b>) according to your settings.</li>
+<li>import soft.sql in your database</li>
+<li>install all dependencies: <pre>composer install<pre></li>
+</ul>
